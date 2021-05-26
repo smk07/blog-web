@@ -1,0 +1,12 @@
+<div *ngFor="let notification of notifications; index as i">
+    <div *ngIf="notification.read" style="background-color: darkgray;">
+        <a (click)="read(notification._id,i)" style="text-decoration:none;color:black;" [routerLink]="'../posts/'+notification.postId">
+            <p>{{notification.byUname}} {{notification.content}} {{notification.postId}}</p>
+        </a>
+    </div>
+    <div *ngIf="!notification.read" style="background-color:white;">
+        <a (click)="read(notification._id,i)" style="text-decoration:none;color:black;" [routerLink]="'../posts/'+notification.postId">
+            <p>{{notification.byUname}} {{notification.content}} {{notification.postId}}</p>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<div *ngIf="!loading">
+    <p>{{post.title}}</p>
+    <p>{{post.description}}</p>
+    {{dsc.uname.value}} {{post.uname}}
+    <div *ngIf="post.uname==dsc.uname.value||dsc.userRole.value=='admin'">
+        <button (click)="deletePost(post._id)" type="submit" class="btn btn-danger">Delete</button>
+    </div>
+    <div *ngIf="post.uname==dsc.uname.value">
+        <button [routerLink]="'/post/'+post._id" type="submit" class="btn btn-primary">Update</button>
+    </div>
+    <div>
+        <a *ngIf="!liked" style="text-decoration:none;color:black;" (click)="likePost(post._id)">Like</a>
+        <a *ngIf="liked" style="text-decoration:none;color:black;" (click)="unlikePost(post._id)">Unlike</a>
+    </div>
+    <p>Liked by {{post.likedBy.length}} people</p>
+    <form [formGroup]="commentForm">
+        <div class="mb-3 col-lg-6">
+            <input 
+                type="text" 
+                class="form-control" 
+                formControlName="content" 
+                id="newComment"
+                placeholder="Add a comment"
+            >
+        </div>
+        <!-- <input type="password" name="password" formControlName="password" /> -->
+        <button (click)="addComment(post._id)" [disabled]="commentForm.invalid" type="submit" class="btn btn-primary">Add Comment</button>
+    </form>
+    <div *ngFor="let comment of post.comments">
+        <div *ngIf="comment">
+            <a [routerLink]="'../../profile/'+comment.uname">{{comment.uname}}</a> 
+            <div *ngIf="!edited">
+                {{comment.content}} 
+                <a *ngIf="comment.uname==dsc.uname.value" (click)="editty(comment.content)">Edit</a>
+                <a *ngIf="comment.uname==dsc.uname.value||dsc.userRole.value=='admin' ||dsc.uname.value==post.uname" (click)="deleteComment(post._id,comment._id)">Delete</a>
+                <div>
+                    <a *ngIf="!comment.likedBy.includes(dsc.uname.value)" style="text-decoration:none;color:black;" (click)="likeComment(post._id,comment._id)">Like</a>
+                    <a *ngIf="comment.likedBy.includes(dsc.uname.value)" style="text-decoration:none;color:black;" (click)="unlikeComment(post._id,comment._id)">Unlike</a>
+                    <p>Liked by {{comment.likedBy.length}} people</p>
+                </div>
+            </div>
+            <div *ngIf="edited">
+                <form [formGroup]="editForm">
+                    <div class="mb-3 col-lg-6">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            formControlName="content" 
+                            id="editComment"
+                            placeholder="Add a comment"
+                        >
+                    </div>
+                    <button *ngIf="comment.uname==dsc.uname.value" [disabled]="editForm.invalid" (click)="editComment(post._id,comment._id)">Save</button>
+                    <a *ngIf="comment.uname==dsc.uname.value||dsc.userRole.value=='admin' ||dsc.uname.value==post.uname" (click)="deleteComment(post._id,comment._id)">Delete</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

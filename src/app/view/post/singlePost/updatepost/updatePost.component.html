@@ -1,0 +1,33 @@
+<form [formGroup]="updateForm">
+    <div class="mb-3 col-lg-6">
+        <label 
+            for="title" 
+            class="form-label"
+        >Title
+        </label>
+        <input 
+            type="text" 
+            class="form-control" 
+            formControlName="title" 
+            id="title" 
+        >
+    </div>
+    <div class="mb-3 col-lg-6">
+        <label 
+            for="description" 
+            class="form-label"
+        >Description
+        </label>
+        <textarea 
+            type="text" 
+            class="form-control" 
+            formControlName="description" 
+            id="description"
+            rows="7" 
+        ></textarea>
+    </div>
+
+    <button (click)="savePost()" [disabled]="updateForm.invalid" type="submit" class="btn btn-primary">Save</button>
+    <button style="margin-left: 20px;" (click)="reset()" type="button" class="btn btn-success">Reset</button>
+    <button style="margin-left: 20px;" (click)="back()" type="button" class="btn btn-primary">Back</button>
+</form>

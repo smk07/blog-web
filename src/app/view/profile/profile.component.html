@@ -1,0 +1,11 @@
+<div *ngIf="response">
+    Profile Found
+    <app-post [posts]="response.data.post"></app-post>
+    <div *ngIf="dsc.uname.value!=uname">
+        <a *ngIf="subscribed" (click)="unSubscribe()">Unsubscribe</a>
+        <a *ngIf="!subscribed" (click)="subscribe()">Subscribe</a>
+    </div>
+</div>
+<div *ngIf="!response">
+    Profile Not Found
+</div>

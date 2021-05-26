@@ -1,0 +1,36 @@
+<form [formGroup]="resetForm" class="form-group">
+    <div *ngIf="(resetForm.controls['rePassword'].dirty || resetForm.controls['rePassword'].touched) &&resetForm.controls['rePassword'].invalid" class="alert">
+        <div *ngIf="resetForm.controls['rePassword'].errors.mustMatch">
+            Passwords must match
+        </div>
+    </div>
+    <div class="mb-3 col-lg-6">
+        <label 
+            for="password" 
+            class="form-label"
+        >
+            Password
+        </label>
+        <input 
+            type="password" 
+            class="form-control" 
+            id="password"
+            formControlName="password"
+        >
+    </div>
+    <div class="mb-3 col-lg-6">
+        <label 
+            for="rePassword" 
+            class="form-label"
+        >
+            Re-Enter Your Password
+        </label>
+        <input 
+            type="password" 
+            class="form-control" 
+            id="rePassword"
+            formControlName="rePassword"
+        >
+    </div>
+    <button (click)="reset()" [disabled]="resetForm.invalid" type="submit" class="btn btn-success">Change Password</button>
+</form>

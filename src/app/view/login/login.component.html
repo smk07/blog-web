@@ -1,0 +1,39 @@
+<form [formGroup]="userForm" class="form-group">
+
+    <div *ngIf="invalidCred" class="col-lg-6">
+        Invalid Credentials 
+    </div>
+    <div class="mb-3 col-lg-6">
+        <label 
+            for="exampleFormControlInput1" 
+            class="form-label"
+        >Username or Email
+        </label>
+        <input 
+            type="text" 
+            class="form-control" 
+            formControlName="loginId" 
+            id="exampleFormControlInput1" 
+            placeholder="name@example.com"
+        >
+    </div>
+    <div class="mb-3 col-lg-6">
+        <label 
+            for="exampleFormControlInput2" 
+            class="form-label"
+        >
+            Password
+        </label>
+        <input 
+            type="password" 
+            class="form-control" 
+            id="exampleFormControlInput2"
+            formControlName="password"
+        >
+    </div>
+    <a routerLink='/forgot'>Forgot Password?</a>
+    <br/>
+    <button (click)="login()" class="btn btn-primary">Login</button>
+    <br/>
+    <a routerLink='/signup'>Don't have an Account? Sign Up Here</a>
+</form>
